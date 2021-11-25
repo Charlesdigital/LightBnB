@@ -2,16 +2,16 @@ DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS properties CASCADE;
 DROP TABLE IF EXISTS reservations CASCADE;
 DROP TABLE IF EXISTS property_reviews CASCADE;
-
+--if the table already exist it will cause an error, this deletes any existing tables with that name
 CREATE TABLE users (
-  id SERIAL PRIMARY KEY NOT NULL,
+  id SERIAL PRIMARY KEY NOT NULL, --serial mean automatically created an id
   name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE properties (
-  id SERIAL PRIMARY KEY NOT NULL,
+  id SERIAL PRIMARY KEY NOT NULL, -- create an id for each values eg, 3 properties number increments
   owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
 
   title VARCHAR(255) NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE reservations (
   id SERIAL PRIMARY KEY NOT NULL,
   start_date DATE NOT NULL,
   end_date DATE NOT NULL,
-  property_id INTEGER REFERENCES properties(id) ON DELETE CASCADE,
+  property_id INTEGER REFERENCES properties(id) ON DELETE CASCADE, -- connection here, references properties(id) primary key
   guest_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
